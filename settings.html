@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Settings | FM Network</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">FM</div>
+
+    <nav class="menu">
+      <a href="index.html">🏠 Home</a>
+      <a href="games.html">🎮 Games</a>
+      <a href="shop.html">🛒 Shop</a>
+      <a href="achievements.html">🏆 Achievements</a>
+      <a class="active" href="settings.html">⚙️ Settings</a>
+      <a href="index.html#about">ℹ️ About</a>
+    </nav>
+
+    <div class="user-box">
+      <img id="avatar">
+      <div>
+        <span id="username">User</span>
+        <small>Settings</small>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="content">
+    <h1 class="page-title">Settings</h1>
+
+    <section class="cards">
+
+      <!-- Account -->
+      <div class="card">
+        <h3>Account</h3>
+        <p>Username</p>
+        <input id="nameInput" placeholder="Enter username" />
+        <button onclick="saveUsername()">Save</button>
+      </div>
+
+      <!-- Theme -->
+      <div class="card">
+        <h3>Theme</h3>
+        <p>Choose site theme</p>
+        <button onclick="setTheme('dark')">Dark</button>
+        <button onclick="setTheme('neon')">Neon</button>
+      </div>
+
+      <!-- Language -->
+      <div class="card">
+        <h3>Language</h3>
+        <select id="langSelect" onchange="changeLang()">
+          <option value="en">English</option>
+          <option value="ar">Arabic</option>
+          <option value="mix">Arabic + English</option>
+        </select>
+      </div>
+
+      <!-- Info -->
+      <div class="card"

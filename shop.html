@@ -1,4 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shop | FM Network</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<h2>Shop</h2>
-<button onclick="buy(50)">Buy VIP (50 Points)</button>
-<script src="assets/js/shop.js"></script>
+  <style>
+    body {
+      margin: 0;
+      background: var(--bg-dark, #05070d);
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .container {
+      padding: 30px;
+    }
+
+    h1 {
+      color: var(--neon, #4fdfff);
+      margin-bottom: 20px;
+    }
+
+    .points {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .shop {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      border-radius: 18px;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+    }
+
+    .card h3 {
+      margin-top: 0;
+    }
+
+    button {
+      margin-top: 15px;
+      background: var(--neon, #4fdfff);
+      border: none;
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Shop</h1>
+
+  <div class="points">Your Points: <span id="pointsCount">0</span></div>
+
+  <div class="shop" id="shopList">
+    <!-- JS Inject -->
+  </div>
+</div>
+
+<script>
+  let points = parseInt(localStorage.getItem("points") || "0");
+  document.getElementById("pointsCount").innerText = points;
+
+  const items = [
+    {name:"Gamer Role", cost:50},
+    {name:"VIP Role", cost:150},
+    {name:"Pro Role", cost:300}
+  ];
+
+  const shopList = document.getElementById("shopList");
+
+  items.forEach(item => {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+      <h3>${item.name}</h3>
+      <p>Cost: ${item.cost} points</p>
+      <button onclick="buy('${item.name}', ${item.cost}, this)">Buy</button>
+    `;
+    shopList.appendChild(card);
+  });
+
+  function buy(name, cost, btn) {
+    if (points >= cost) {
+      points -= cost;
+      localStorage.setItem("points", points);
+      document.getElementById("pointsCount").innerText = points;
+      btn.disabled = true;
+      btn.innerText = "Purchased ✅";
+      alert(`You bought ${name}!`);
+    } else {
+      alert("❌ Not enough points");
+    }
+  }
+</script>
+
+</body>
+</html>

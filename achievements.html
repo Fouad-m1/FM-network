@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Achievements | FM Network</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      background: var(--bg-dark, #05070d);
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .container {
+      padding: 30px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: var(--neon, #4fdfff);
+      letter-spacing: 1px;
+    }
+
+    .achievements {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+      transition: 0.3s;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        120deg,
+        transparent,
+        var(--neon, #4fdfff),
+        transparent
+      );
+      opacity: 0;
+      transition: 0.4s;
+    }
+
+    .card:hover::before {
+      opacity: 0.15;
+    }
+
+    .card:hover {
+      transform: translateY(-8px) scale(1.02);
+    }
+
+    .icon {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .title {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .desc {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    .locked {
+      opacity: 0.4;
+      filter: grayscale(1);
+    }
+
+    .status {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: #22c55e;
+      color: #000;
+    }
+
+    .locked .status {
+      background: #444;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Achievements</h1>
+
+  <div class="achievements" id="achievementList">
+    <!-- JS Inject -->
+  </div>
+</div>
+
+<script>
+  const streak = parseInt(localStorage.getItem("streak") || "0");
+  const points = parseInt(localStorage.getItem("points") || "0");
+
+  const achievements = [
+    {
+      icon: "🔥",
+      title: "Daily Grinder",
+      desc: "Login 3 days in a row",
+      unlocked: streak >= 3
+    },
+    {
+      icon: "⚡",
+      title: "Hardcore",
+      desc: "Login 7 days in a row",
+      unlocked: streak >= 7
+    },
+    {
+      icon: "🎮",
+      title: "Gamer",
+      desc: "Earn 100 points",
+      unlocked: points >= 100
+    },
+    {
+      icon: "💎",
+      title: "VIP",
+      desc: "Earn 500 points",
+      unlocked: points >= 500
+    },
+    {
+      icon: "🚀",
+      title: "FM Legend",
+      desc: "Earn 1000 points",
+      unlocked: points >= 1000
+    }
+  ];
+
+  const list = document.getElementById("achievementList");
+
+  achievements.forEach(a => {
+    const card = document.createElement("div");
+    card.className = "card" + (a.unlocked ? "" : " locked");
+
+    card.innerHTML = `
+      <div class="status">${a.unlocked ? "Unlocked" : "Locked"}</div>
+      <div class="icon">${a.icon}</div>
+      <div class="title">${a.title}</div>
+      <div class="desc">${a.desc}</div>
+    `;
+
+    list.appendChild(card);
+  });
+</script>
+
+</body>
+</html>

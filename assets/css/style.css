@@ -1,37 +1,366 @@
+:root {
+  --bg: #020617;
+  --bg-2: #020617;
+  --card: #020617;
+  --accent: #38bdf8;
+  --text: #e5e7eb;
+  --muted: #94a3b8;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  font-family: "Segoe UI", system-ui, sans-serif;
 }
 
 body {
-  background: #0f172a;
-  color: #e5e7eb;
+  background: radial-gradient(circle at top, #020617, #020617);
+  color: var(--text);
 }
 
-nav {
+.app {
   display: flex;
-  justify-content: space-between;
-  padding: 15px 30px;
+  height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 240px;
   background: #020617;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  animation: slideIn 0.6s ease;
 }
 
-nav a {
-  color: #38bdf8;
-  margin-left: 15px;
+.logo {
+  font-size: 32px;
+  font-weight: bold;
+  color: var(--accent);
+  margin-bottom: 30px;
+}
+
+.menu a {
+  display: block;
+  padding: 12px;
+  margin-bottom: 8px;
   text-decoration: none;
+  color: var(--text);
+  border-radius: 10px;
+  transition: 0.3s;
 }
 
-main {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+.menu a:hover,
+.menu a.active {
+  background: rgba(56,189,248,0.15);
+  color: var(--accent);
+  box-shadow: 0 0 15px rgba(56,189,248,0.5);
+}
+
+/* User box */
+.user-box {
+  margin-top: auto;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.user-box img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+}
+
+.user-box small {
+  color: var(--muted);
+}
+
+/* Content */
+.content {
+  flex: 1;
   padding: 30px;
+  overflow-y: auto;
+}
+
+.page-title {
+  font-size: 28px;
+}
+
+/* Cards */
+.cards {
+  margin-top: 25px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
 }
 
 .card {
-  background: #020617;
+  background: var(--card);
   padding: 20px;
+  border-radius: 14px;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+}
+
+/* RGB Glow */
+.glow {
+  border: 2px solid transparent;
+  animation: rgb 6s linear infinite;
+}
+
+@keyframes rgb {
+  0% { border-color: red; }
+  33% { border-color: cyan; }
+  66% { border-color: violet; }
+  100% { border-color: red; }
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-box {
+  background: #020617;
+  padding: 30px;
+  border-radius: 16px;
+  width: 420px;
+  animation: pop 0.4s ease;
+}
+
+.modal-box button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: var(--accent);
+  border: none;
   border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+@keyframes pop {
+  from { transform: scale(0.7); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+/* ===============================
+   FM Network - Main Style
+   Dark / Neon / RGB Theme
+================================ */
+
+/* ===== Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+body {
+  background: radial-gradient(circle at top, #0a0f1e, #05070d);
+  color: #eaeaff;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ===== Variables ===== */
+:root {
+  --bg-dark: #05070d;
+  --bg-card: rgba(20, 25, 50, 0.7);
+  --neon: #4fdfff;
+  --neon-soft: rgba(79, 223, 255, 0.4);
+  --rgb-1: #ff4fd8;
+  --rgb-2: #7c7cff;
+  --rgb-3: #4dff88;
+  --border-glow: 0 0 15px var(--neon-soft);
+}
+
+/* ===== Layout ===== */
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ===== Sidebar ===== */
+.sidebar {
+  width: 90px;
+  background: linear-gradient(180deg, #05070d, #0b1024);
+  border-right: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  transition: width 0.4s ease;
+}
+
+.sidebar:hover {
+  width: 220px;
+}
+
+.sidebar .logo {
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--neon);
+  margin-bottom: 40px;
+  text-shadow: 0 0 15px var(--neon);
+}
+
+.menu {
+  width: 100%;
+}
+
+.menu-item {
+  width: 100%;
+  padding: 14px 20px;
+  color: #ccc;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.menu-item span {
+  opacity: 0;
+  white-space: nowrap;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar:hover .menu-item span {
+  opacity: 1;
+}
+
+.menu-item:hover {
+  background: linear-gradient(
+    90deg,
+    rgba(79,223,255,0.15),
+    transparent
+  );
+  color: var(--neon);
+}
+
+/* ===== Main Content ===== */
+.main {
+  flex: 1;
+  padding: 40px;
+}
+
+/* ===== Cards ===== */
+.card {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow:
+    0 0 20px rgba(0,0,0,0.6),
+    inset 0 0 0 1px rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  animation: fadeUp 0.8s ease;
+}
+
+.card.neon {
+  border: 1px solid var(--neon-soft);
+  box-shadow:
+    0 0 25px var(--neon-soft),
+    inset 0 0 20px rgba(79,223,255,0.05);
+}
+
+/* ===== Buttons ===== */
+.btn {
+  padding: 12px 24px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(
+    120deg,
+    var(--rgb-1),
+    var(--rgb-2),
+    var(--rgb-3)
+  );
+  background-size: 300% 300%;
+  color: #000;
+  font-weight: bold;
+  animation: rgbMove 5s linear infinite;
+  box-shadow: 0 0 20px rgba(255,255,255,0.2);
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+/* ===== About Modal ===== */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-box {
+  width: 90%;
+  max-width: 520px;
+  background: linear-gradient(160deg, #0b1024, #05070d);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 0 40px var(--neon-soft);
+  animation: zoomIn 0.4s ease;
+}
+
+.modal-box h2 {
+  color: var(--neon);
+  margin-bottom: 10px;
+}
+
+.modal-box p {
+  color: #ccc;
+  line-height: 1.6;
+}
+
+/* ===== Animations ===== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes rgbMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }

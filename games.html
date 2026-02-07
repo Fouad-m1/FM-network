@@ -1,4 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Games | FM Network</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<h2>Click Game</h2>
-<button onclick="addPoint()">Click me</button>
-<script src="assets/js/games.js"></script>
+  <style>
+    body {
+      margin: 0;
+      background: var(--bg-dark, #05070d);
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .container {
+      padding: 30px;
+    }
+
+    h1 {
+      color: var(--neon, #4fdfff);
+      margin-bottom: 20px;
+    }
+
+    .stats {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .stat {
+      background: rgba(255,255,255,0.05);
+      padding: 15px 20px;
+      border-radius: 14px;
+      min-width: 140px;
+      text-align: center;
+    }
+
+    .stat span {
+      display: block;
+      font-size: 22px;
+      color: var(--neon, #4fdfff);
+    }
+
+    .games {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      border-radius: 18px;
+      padding: 20px;
+      transition: 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        120deg,
+        transparent,
+        var(--neon, #4fdfff),
+        transparent
+      );
+      opacity: 0;
+      transition: 0.4s;
+    }
+
+    .card:hover::before {
+      opacity: 0.15;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+    }
+
+    .card h3 {
+      margin-top: 0;
+    }
+
+    button {
+      margin-top: 15px;
+      background: var(--neon, #4fdfff);
+      border: none;
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <h1>Games</h1>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      Points
+      <span id="pointsCount">0</span>
+    </div>
+    <div class="stat">
+      Streak
+      <span id="streakCount">0 🔥</span>
+    </div>
+  </div>
+
+  <!-- Games -->
+  <div class="games">
+
+    <!-- Daily Login -->
+    <div class="card">
+      <h3>🔥 Daily Login</h3>
+      <p>Login today and earn points</p>
+      <button id="dailyBtn" onclick="dailyLogin()">Claim</button>
+    </div>
+
+    <!-- Click Game -->
+    <div class="card">
+      <h3>🖱️ Click Master</h3>
+      <p>Click to earn points</p>
+      <button onclick="addPoints(10)">+10 Points</button>
+    </div>
+
+    <!-- Lucky Game -->
+    <div class="card">
+      <h3>🎲 Lucky Roll</h3>
+      <p>50% chance to win 30 points</p>
+      <button onclick="lucky()">Try Luck</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  let points = parseInt(localStorage.getItem("points") || "0");
+  let streak = parseInt(localStorage.getItem("streak") || "0");
+
+  const today = new Date().toDateString();
+  const lastDaily = localStorage.getItem("dailyClaim");
+
+  document.getElementById("pointsCount").innerText = points;
+  document.getElementById("streakCount").innerText = streak + " 🔥";
+
+  // Daily Login
+  if (lastDaily === today) {
+    document.getElementById("dailyBtn").disabled = true;
+    document.getElementById("dailyBtn").innerText = "Claimed";
+  }
+
+  function dailyLogin() {
+    points += 25;
+    streak += 1;
+
+    localStorage.setItem("points", points);
+    localStorage.setItem("streak", streak);
+    localStorage.setItem("dailyClaim", today);
+
+    location.reload();
+  }
+
+  function addPoints(amount) {
+    points += amount;
+    localStorage.setItem("points", points);
+    document.getElementById("pointsCount").innerText = points;
+  }
+
+  function lucky() {
+    if (Math.random() > 0.5) {
+      addPoints(30);
+      alert("🎉 You won 30 points!");
+    } else {
+      alert("❌ You lost. Try again!");
+    }
+  }
+</script>
+
+</body>
+</html>
