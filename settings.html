@@ -1,68 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Settings | FM Network</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="assets/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FM Network | Settings</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-<div class="app">
-
-  <!-- Sidebar -->
-  <aside class="sidebar">
-    <div class="logo">FM</div>
-
-    <nav class="menu">
-      <a href="index.html">🏠 Home</a>
-      <a href="games.html">🎮 Games</a>
-      <a href="shop.html">🛒 Shop</a>
-      <a href="achievements.html">🏆 Achievements</a>
-      <a class="active" href="settings.html">⚙️ Settings</a>
-      <a href="index.html#about">ℹ️ About</a>
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <div class="brand">
+            <i class="fa-solid fa-gamepad"></i> FM Network
+        </div>
+        <ul class="nav-menu">
+            <li><a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i> <span data-i18n="dashboard">Dashboard</span></a></li>
+            <li><a href="games.html" class="nav-item"><i class="fa-solid fa-dice"></i> <span data-i18n="games">Games</span></a></li>
+            <li><a href="shop.html" class="nav-item"><i class="fa-solid fa-cart-shopping"></i> <span data-i18n="shop">Shop</span></a></li>
+            <li><a href="achievements.html" class="nav-item"><i class="fa-solid fa-trophy"></i> <span data-i18n="achievements">Achievements</span></a></li>
+            <li><a href="settings.html" class="nav-item active"><i class="fa-solid fa-gear"></i> <span data-i18n="settings">Settings</span></a></li>
+        </ul>
+        <div class="user-mini">
+            <img src="" alt="Avatar" class="user-avatar-sm" data-bind="avatar">
+            <div class="user-info-sm">
+                <h4 data-bind="username">...</h4>
+                <span><i class="fa-solid fa-coins"></i> <span data-bind="points">0</span></span>
+            </div>
+        </div>
     </nav>
 
-    <div class="user-box">
-      <img id="avatar">
-      <div>
-        <span id="username">User</span>
-        <small>Settings</small>
-      </div>
+    <!-- Main Content -->
+    <main class="main-content">
+        <header>
+            <div class="page-title">
+                <h1>Settings</h1>
+                <p>Manage your preferences and account.</p>
+            </div>
+        </header>
+
+        <div style="max-width: 600px;">
+            <!-- Language Settings -->
+            <div class="card" style="margin-bottom: 2rem;">
+                <h3 style="margin-bottom: 1rem;"><i class="fa-solid fa-globe"></i> Language / اللغة</h3>
+                <div style="display: flex; gap: 1rem;">
+                    <button class="btn lang-btn" data-lang="en" onclick="Settings.setLanguage('en')" style="border: 1px solid rgba(255,255,255,0.1); background: transparent;">English</button>
+                    <button class="btn lang-btn" data-lang="ar" onclick="Settings.setLanguage('ar')" style="border: 1px solid rgba(255,255,255,0.1); background: transparent;">العربية</button>
+                </div>
+            </div>
+
+            <!-- Theme Settings (Static for now) -->
+            <div class="card" style="margin-bottom: 2rem;">
+                <h3 style="margin-bottom: 1rem;"><i class="fa-solid fa-palette"></i> Theme</h3>
+                <div style="display: flex; gap: 1rem;">
+                    <button class="btn" style="border: 1px solid var(--primary); color: var(--primary); background: rgba(0,243,255,0.1);">Neon Dark</button>
+                    <button class="btn" disabled style="opacity: 0.5; border: 1px solid #555;">Light Mode (N/A)</button>
+                </div>
+            </div>
+
+            <!-- Danger Zone -->
+            <div class="card" style="border-color: var(--danger);">
+                <h3 style="margin-bottom: 1rem; color: var(--danger);"><i class="fa-solid fa-triangle-exclamation"></i> Danger Zone</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">Resetting your data will wipe all points, roles, and achievements.</p>
+                <button class="btn btn-danger" onclick="Settings.resetAccount()">
+                    <i class="fa-solid fa-trash"></i> Reset All Data
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Mobile Nav -->
+    <div class="mobile-nav">
+        <a href="index.html" class="mobile-nav-item"><i class="fa-solid fa-house"></i> <span>Home</span></a>
+        <a href="games.html" class="mobile-nav-item"><i class="fa-solid fa-dice"></i> <span>Games</span></a>
+        <a href="shop.html" class="mobile-nav-item"><i class="fa-solid fa-cart-shopping"></i> <span>Shop</span></a>
+        <a href="settings.html" class="mobile-nav-item"><i class="fa-solid fa-gear"></i> <span>Set.</span></a>
     </div>
-  </aside>
 
-  <!-- Main -->
-  <main class="content">
-    <h1 class="page-title">Settings</h1>
-
-    <section class="cards">
-
-      <!-- Account -->
-      <div class="card">
-        <h3>Account</h3>
-        <p>Username</p>
-        <input id="nameInput" placeholder="Enter username" />
-        <button onclick="saveUsername()">Save</button>
-      </div>
-
-      <!-- Theme -->
-      <div class="card">
-        <h3>Theme</h3>
-        <p>Choose site theme</p>
-        <button onclick="setTheme('dark')">Dark</button>
-        <button onclick="setTheme('neon')">Neon</button>
-      </div>
-
-      <!-- Language -->
-      <div class="card">
-        <h3>Language</h3>
-        <select id="langSelect" onchange="changeLang()">
-          <option value="en">English</option>
-          <option value="ar">Arabic</option>
-          <option value="mix">Arabic + English</option>
-        </select>
-      </div>
-
-      <!-- Info -->
-      <div class="card"
+    <!-- Scripts -->
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/settings.js"></script>
+</body>
+</html>

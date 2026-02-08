@@ -1,98 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>FM Network</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FM Network | Dashboard</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-<div class="app">
+    <!-- Sidebar (Desktop) -->
+    <nav class="sidebar">
+        <div class="brand">
+            <i class="fa-solid fa-gamepad"></i> FM Network
+        </div>
+        
+        <ul class="nav-menu">
+            <li><a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i> <span data-i18n="dashboard">Dashboard</span></a></li>
+            <li><a href="games.html" class="nav-item"><i class="fa-solid fa-dice"></i> <span data-i18n="games">Games</span></a></li>
+            <li><a href="shop.html" class="nav-item"><i class="fa-solid fa-cart-shopping"></i> <span data-i18n="shop">Shop</span></a></li>
+            <li><a href="achievements.html" class="nav-item"><i class="fa-solid fa-trophy"></i> <span data-i18n="achievements">Achievements</span></a></li>
+            <li><a href="settings.html" class="nav-item"><i class="fa-solid fa-gear"></i> <span data-i18n="settings">Settings</span></a></li>
+        </ul>
 
-  <!-- Sidebar -->
-  <aside class="sidebar">
-    <div class="logo">FM</div>
-    <nav class="menu">
-      <a class="active" href="index.html">🏠 Home</a>
-      <a href="games.html">🎮 Games</a>
-      <a href="shop.html">🛒 Shop</a>
-      <a href="achievements.html">🏆 Achievements</a>
-      <a href="settings.html">⚙️ Settings</a>
-      <a href="#" onclick="openAbout()">ℹ️ About</a>
+        <div class="user-mini">
+            <img src="" alt="Avatar" class="user-avatar-sm" data-bind="avatar">
+            <div class="user-info-sm">
+                <h4 data-bind="username">...</h4>
+                <span><i class="fa-solid fa-coins"></i> <span data-bind="points">0</span></span>
+            </div>
+        </div>
     </nav>
 
-    <div class="user-box">
-      <img id="avatar">
-      <div>
-        <span id="username">User</span>
-        <small>Dashboard</small>
-      </div>
+    <!-- Main Content -->
+    <main class="main-content">
+        <header>
+            <div class="page-title">
+                <h1><span data-i18n="dashboard">Dashboard</span></h1>
+                <p><span data-i18n="welcome">Welcome back,</span> <span class="text-gradient" data-bind="username">Driver</span>!</p>
+            </div>
+            <!-- Optional Top Actions -->
+        </header>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <!-- Points Card -->
+            <div class="card">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <div>
+                        <h3 style="color:var(--text-muted); font-size:0.9rem; margin-bottom:5px;" data-i18n="points">Points</h3>
+                        <h2 style="font-size:2.5rem; color:var(--primary);" data-bind="points">0</h2>
+                    </div>
+                    <i class="fa-solid fa-coins" style="font-size:3rem; opacity:0.2; color:var(--primary);"></i>
+                </div>
+            </div>
+
+            <!-- Streak Card -->
+            <div class="card">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <div>
+                        <h3 style="color:var(--text-muted); font-size:0.9rem; margin-bottom:5px;" data-i18n="streak">Day Streak</h3>
+                        <h2 style="font-size:2.5rem; color:var(--secondary);" data-bind="streak">0</h2>
+                    </div>
+                    <i class="fa-solid fa-fire" style="font-size:3rem; opacity:0.2; color:var(--secondary);"></i>
+                </div>
+            </div>
+
+             <!-- Roles Card -->
+             <div class="card">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <div>
+                        <h3 style="color:var(--text-muted); font-size:0.9rem; margin-bottom:5px;" data-i18n="roles">Roles Owned</h3>
+                        <h2 style="font-size:2.5rem; color:var(--success);" id="roles-count">0</h2>
+                    </div>
+                    <i class="fa-solid fa-id-badge" style="font-size:3rem; opacity:0.2; color:var(--success);"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="min-height: 200px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+            <i class="fa-brands fa-discord" style="font-size: 3rem; margin-bottom: 1rem; color: #5865F2;"></i>
+            <h3>Join the Community</h3>
+            <p style="color: var(--text-muted); margin: 10px 0 20px;">Connect with us on Discord to participate in events!</p>
+            <a href="#" class="btn btn-primary">Join Server</a>
+        </div>
+
+    </main>
+
+    <!-- Mobile Bottom Nav -->
+    <div class="mobile-nav">
+        <a href="index.html" class="mobile-nav-item"><i class="fa-solid fa-house"></i> <span>Home</span></a>
+        <a href="games.html" class="mobile-nav-item"><i class="fa-solid fa-dice"></i> <span>Games</span></a>
+        <a href="shop.html" class="mobile-nav-item"><i class="fa-solid fa-cart-shopping"></i> <span>Shop</span></a>
+        <a href="settings.html" class="mobile-nav-item"><i class="fa-solid fa-gear"></i> <span>Set.</span></a>
     </div>
-  </aside>
 
-  <!-- Main Content -->
-  <main class="content">
-    <h1 class="page-title">Welcome, <span id="usernameMain">User</span>!</h1>
-    <p style="color:#94a3b8;margin-bottom:20px">
-      Your FM Network Dashboard
-    </p>
-
-    <!-- Discord Info Placeholder -->
-    <div class="cards">
-      <div class="card">
-        <h3>Discord Server</h3>
-        <p>Members: <span id="discordMembers">Loading...</span></p>
-        <p>Online: <span id="discordOnline">Loading...</span></p>
-      </div>
-
-      <div class="card">
-        <h3>Points</h3>
-        <p><span id="pointsCount">0</span></p>
-      </div>
-
-      <div class="card">
-        <h3>Daily Login Streak</h3>
-        <p><span id="streakCount">0 🔥</span></p>
-      </div>
+    <!-- Login Modal -->
+    <div class="modal-overlay" id="login-modal">
+        <div class="modal">
+            <h2 class="text-gradient">FM Network</h2>
+            <p style="margin-top: 10px; color: var(--text-muted);">Enter your Discord username to start.</p>
+            
+            <input type="text" id="username-input" placeholder="Username" maxlength="15">
+            
+            <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="handleLogin()">
+                Start Journey <i class="fa-solid fa-rocket"></i>
+            </button>
+        </div>
     </div>
-  </main>
 
-</div>
+    <script src="assets/js/app.js"></script>
+    <script>
+        // Page specific logic
+        document.addEventListener('DOMContentLoaded', () => {
+             // Update roles count separately as it is computed
+             if(App.user) {
+                 document.getElementById('roles-count').innerText = App.user.inventory.length;
+             }
+        });
 
-<!-- About Modal -->
-<div id="aboutModal" class="modal">
-  <div class="modal-box">
-    <h2>About FM Network</h2>
-    <p>
-      FM Network is a community built for gamers and developers.
-      Enjoy games, earn points, buy roles, and track your achievements.
-    </p>
-    <button onclick="closeAbout()">Close</button>
-  </div>
-</div>
-
-<script src="script.js"></script>
-
-<script>
-  // Load User
-  const user = JSON.parse(localStorage.getItem("fm_user")) || { username: "Guest" };
-  document.getElementById("username").innerText = user.username;
-  document.getElementById("usernameMain").innerText = user.username;
-  document.getElementById("avatar").src = `https://api.dicebear.com/7.x/bottts/svg?seed=${user.username}`;
-
-  // Load Points & Streak
-  const points = parseInt(localStorage.getItem("points") || "0");
-  const streak = parseInt(localStorage.getItem("streak") || "0");
-  document.getElementById("pointsCount").innerText = points;
-  document.getElementById("streakCount").innerText = streak + " 🔥";
-
-  // Discord Info Placeholder (dummy)
-  document.getElementById("discordMembers").innerText = "120";
-  document.getElementById("discordOnline").innerText = "35";
-</script>
-
+        function handleLogin() {
+            const input = document.getElementById('username-input');
+            if(input.value.length > 0) {
+                App.login(input.value);
+            } else {
+                input.style.borderColor = 'var(--danger)';
+            }
+        }
+    </script>
 </body>
 </html>
-git add .
